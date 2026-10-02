@@ -7,13 +7,22 @@ static partial class Program
 {
     static void Main()
     {
+        
         Raylib.InitWindow(LARGEUR, HAUTEUR, "Breakout");
         Raylib.SetTargetFPS(60);
+
+
         Reinitialiser();
 
         while (!Raylib.WindowShouldClose())
         {
             float dt = Raylib.GetFrameTime();
+
+            if (Raylib.IsKeyPressed(KeyboardKey.R))
+            {
+                Reinitialiser();
+            }
+
 
             switch (etat)
             {
@@ -32,11 +41,17 @@ static partial class Program
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.Black);
             DessinerJeu();
+
+
             if (etat == EtatJeu.Perdu || etat == EtatJeu.Gagne)
             {
                 DessinerFin();
             }
+
+
             Raylib.EndDrawing();
+
+
         }
 
         Raylib.CloseWindow();
@@ -45,11 +60,18 @@ static partial class Program
     /// <summary>Remet le jeu dans son état de départ.</summary>
     static void Reinitialiser()
     {
+        positionRaquette.X = (LARGEUR / (float)2) - (LARGEUR_RAQUETTE / (float)2);
+
+        positionRaquette.Y = HAUTEUR - HAUTEUR_RAQUETTE - MARGE_BAS_RAQUETTE;
+
+        etat = EtatJeu.Attente;
     }
 
     /// <summary>Une image de jeu dans l'état Attente.</summary>
     static void MettreAJourAttente(float dt)
     {
+        DeplacerRaquette(dt);
+
     }
 
     /// <summary>Une image de jeu dans l'état Jeu.</summary>
