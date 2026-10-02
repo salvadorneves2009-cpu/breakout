@@ -65,6 +65,14 @@ static partial class Program
         positionRaquette.Y = HAUTEUR - HAUTEUR_RAQUETTE - MARGE_BAS_RAQUETTE;
 
         etat = EtatJeu.Attente;
+
+        for (int l = 0; l < LIGNES_BRIQUES; l++)
+        {
+            for (int c = 0; c < COLONNES_BRIQUES; c++)
+            {
+                briques[l, c] = true;
+            }
+        }
     }
 
     /// <summary>Une image de jeu dans l'état Attente.</summary>
@@ -87,8 +95,10 @@ static partial class Program
     static void MettreAJourJeu(float dt)
     {
         DeplacerRaquette(dt);
-
-        
+        DeplacerBalle(dt);
+        RebondirSurMurs();
+        RebondirSurRaquette();
+        CasserBriques();
         positionBalle.X += vitesseBalle.X * dt;
         positionBalle.Y += vitesseBalle.Y * dt;
     }

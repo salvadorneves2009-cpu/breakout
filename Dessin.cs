@@ -31,6 +31,8 @@ static partial class Program
         string titre = etat == EtatJeu.Gagne ? "GAGNE !" : "PERDU";
         DessinerTexteCentre(titre, HAUTEUR / 2 - 20, TAILLE_TITRE, Color.White);
         DessinerTexteCentre("Espace pour rejouer", HAUTEUR / 2 + 30, TAILLE_TEXTE, Color.Gray);
+
+        DessinerBriques();
     }
 
     /// <summary>Dessine un texte centré horizontalement dans la fenêtre.</summary>

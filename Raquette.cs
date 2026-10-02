@@ -41,5 +41,17 @@ static partial class Program
     /// <summary>Fait rebondir la balle si elle touche la raquette.</summary>
     static void RebondirSurRaquette()
     {
+        if (positionBalle.X >= positionRaquette.X &&
+        positionBalle.X <= positionRaquette.X + LARGEUR_RAQUETTE &&
+        positionBalle.Y + RAYON_BALLE >= positionRaquette.Y &&
+        positionBalle.Y - RAYON_BALLE <= positionRaquette.Y + HAUTEUR_RAQUETTE)
+        {
+            
+            if (vitesseBalle.Y > 0)
+            {
+                vitesseBalle.Y = -vitesseBalle.Y;
+                positionBalle.Y = positionRaquette.Y - RAYON_BALLE; 
+            }
+        }
     }
 }
